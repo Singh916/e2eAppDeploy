@@ -1,0 +1,22 @@
+name: Deploy App
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu_latest
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t singh916/go-app:latest .
+
+      - name: Run container
+        run: docker run -d -p 8080:8080 go-app
+        
+            
